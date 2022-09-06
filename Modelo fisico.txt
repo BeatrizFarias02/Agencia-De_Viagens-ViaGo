@@ -1,0 +1,46 @@
+CRIAR BANCO DE  DADOS  ViaGo ;
+USE ViaGo;
+
+CRIAR  TABELA  Usuário (
+    id_usuario INTEGER  PRIMARY KEY auto_increment,
+    Nome_do_Usuario VARCHAR ( 30 ),
+    Data_de_Nascimento DATA ,
+    cpf VARCHAR ( 15 ),
+    tel_usuario VARCHAR ( 11 ),
+    endereco VARCHAR ( 50 ),
+    E-mail_Usuario VARCHAR ( 30 ),
+    Senha_Usuario VARCHAR ( 8 )
+);
+
+CREATE TABLE Compra (
+    id_compra INTEGER PRIMARY KEY,
+    data_compra DATE,
+    valor_compra NUMERIC,
+    desconto NUMERIC,
+    horario VARCHAR (5),
+);
+
+CREATE  TABLE  Passagem (
+    id_passagem INTEGER  PRIMARY KEY auto_increment,
+    nome_passageiro VARCHAR ( 30 ),
+    data_ida DATE ,
+    id_usuario INTEIRO ,
+    FOREIGN KEY (id_usuario) faz referência a Usuario (id_usuario),
+    id_destino INTEIRO ,
+    FOREIGN KEY (id_destino) referencia Destinos (id_destino)
+);
+
+ALTER TABLE Compra ADD CONSTRAINT FK_Compra_2
+    FOREIGN KEY (fk_Cliente_id_cliente)
+    REFERENCES Cliente (id_cliente)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE comprado ADD CONSTRAINT FK_comprado_1
+    FOREIGN KEY (fk_Pacote_id_pacote)
+    REFERENCES Pacote (id_pacote)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE comprado ADD CONSTRAINT FK_comprado_2
+    FOREIGN KEY (fk_Compra_id_compra)
+    REFERENCES Compra (id_compra)
+    ON DELETE SET NULL;
